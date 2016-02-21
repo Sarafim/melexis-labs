@@ -1,7 +1,7 @@
 Question 2.1 Write advantages and disadvantages of behavioral design style
 
 Advantages:
--	The Behavioral description in Verilog is used to describe the function of a design in an algorithmic manner. 
+- The Behavioral description in Verilog is used to describe the function of a design in an algorithmic manner. 
 - Behavioral modeling in Verilog uses constructs similar to C language constructs.
 - Allows describing complex logic
 -	Easy  to use and to understand 
