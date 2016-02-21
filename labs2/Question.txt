@@ -4,9 +4,9 @@ Advantages:
 - The Behavioral description in Verilog is used to describe the function of a design in an algorithmic manner. 
 - Behavioral modeling in Verilog uses constructs similar to C language constructs.
 - Allows describing complex logic
--	Easy  to use and to understand 
+- Easy  to use and to understand 
 Disadvantages
--	Synthesizer create what it wants
+- Synthesizer create what it wants
 
 
 Question 2.2 – Write advantages and disadvantages of structural design style
