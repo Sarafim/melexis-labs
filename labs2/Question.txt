@@ -1,0 +1,44 @@
+Question 2.1 Write advantages and disadvantages of behavioral design style
+
+Advantages:
+-	The Behavioral description in Verilog is used to describe the function of a design in an algorithmic manner. 
+- Behavioral modeling in Verilog uses constructs similar to C language constructs.
+- Allows describing complex logic
+-	Easy  to use and to understand 
+Disadvantages
+-	Synthesizer create what it wants
+
+
+Question 2.2 – Write advantages and disadvantages of structural design style
+
+Advantages:
+-	 Describe digital circuits with certain structure
+-	Synthesizer will create exactly the same circuit that you described (perhaps with some optimizations).
+-	Simplifying of development process
+Disadvantages
+-	a lot of code and as a result large number of errors
+-	you must exactly know what you want
+
+Question 2.3 – In what cases the behavioral design style should be used and when it is better to apply structural design style?
+Explain with examples. Can these two design style be mixed in one project?
+
+Behavioral design style should been used during the description of standard structures, 
+blocks and modules for instance adder, multiplier, register, count and e.g. But if designer want
+to create his own new count, or another module with certain structure, then he must use structural style. 
+Designer can use structural style when synthesizer cannot satisfy all constrains.
+In such situation designer decides that it is possible to remake to achieve the correct design.  
+
+Question 2.4 – Compare conditional compilation with the aid of `ifdef statement and generate 
+construct. What advantages and disadvantages of each approach? When is preferable using 
+each of them?
+
+Conditional compilation of Verilog code with the aid of preprocessor’s `idef, `else, `endif supported since 1995 version of Verilog’s standard.
+So you can safely use this feature in your projects, because almost all Verilog simulators and synthesizers support it. 
+
+Generate construct allows to conditionally compile Verilog code and instantiate modules. 
+It is more powerful than conditional compilation with `ifdef statement, because generate allows using branching (if, case) and for-loops.
+The main drawback of generate construct is that it was added in Verilog-2001, so the old design tools, oriented to Verilog-1995, not support it, 
+creating problems with code portability.
+
+
+
