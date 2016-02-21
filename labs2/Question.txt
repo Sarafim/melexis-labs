@@ -1,23 +1,23 @@
 Question 2.1 Write advantages and disadvantages of behavioral design style
 
 Advantages:
-- The Behavioral description in Verilog is used to describe the function of a design in an algorithmic manner. 
-- Behavioral modeling in Verilog uses constructs similar to C language constructs.
-- Allows describing complex logic
-- Easy  to use and to understand 
+-The Behavioral description in Verilog is used to describe the function of a design in an algorithmic manner. 
+-Behavioral modeling in Verilog uses constructs similar to C language constructs.
+-Allows describing complex logic
+-Easy  to use and to understand 
 Disadvantages
-- Synthesizer create what it wants
+-Synthesizer create what it wants
 
 
 Question 2.2 – Write advantages and disadvantages of structural design style
 
 Advantages:
--	Describe digital circuits with certain structure
--	Synthesizer will create exactly the same circuit that you described (perhaps with some optimizations).
--	Simplifying of development process
+-Describe digital circuits with certain structure
+-Synthesizer will create exactly the same circuit that you described (perhaps with some optimizations).
+-Simplifying of development process
 Disadvantages
--	A lot of code and as a result large number of errors
--	You must exactly know what you want
+-A lot of code and as a result large number of errors
+-You must exactly know what you want
 
 Question 2.3 – In what cases the behavioral design style should be used and when it is better to apply structural design style?
 Explain with examples. Can these two design style be mixed in one project?
