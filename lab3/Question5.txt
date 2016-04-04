@@ -1,0 +1,7 @@
+In case of one-hot encoding only one bit at time will equal to one, so there is no need in prioritization logic and
+we tell to synthesizer about this with the aid of parallel_case statement. 
+This leads to synthesizing smaller and faster circuit. 
+We also can don’t restore FSM from illegal states in default statement 
+(we can suppose that our device will never fall in circumstances that lead to illegal states) and
+add full_case statement together with parallel_case. 
+This will add extra optimization to speed and area of our FSM but reduce its reliability.

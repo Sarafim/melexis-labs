@@ -1,0 +1,1 @@
+We don't get glitches in the output in FSMs.

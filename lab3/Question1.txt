@@ -1,0 +1,6 @@
+I think that synthesizes result will be the same, but there is some differences in simulation.
+Although after each positive edge of clk “state” and “rst_counter” become identical, the ways, which they do it, are different.
+In listing 3.6 FSM determines in which state we have moved and assigns correct outputs value to the “rst_counter”. 
+In listing 3.7 FSM saves new output value for the next state in variable “rst_counter_next” and
+assign it to the “rst_counter” only after the transition to the new state. 
+In both instances transition to the new states and new outputs occurs at the same time.  

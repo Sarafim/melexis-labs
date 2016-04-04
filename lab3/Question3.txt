@@ -1,0 +1,2 @@
+In one-hot FSM state we don't need additional decoder and encoder.
+Decoding is simplified, since the state bits themselves can be used directly to check whether the FSM is in a particular state or not.
