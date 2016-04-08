@@ -25,19 +25,23 @@ subtractor #( .WIDTH ( WIDTH ) ) subtractor_inst( .i_a     ( i_a ),
                                                 );
                                                 
 initial begin
-    i_borr = 1;
+    i_borr = 0;
     i_a = 0;
 		i_b = 0;
-     for( i = 0; i < 2**(WIDTH); i = i + 1 )
-			for( j = 0; j < 2**(WIDTH); j = j + 1 )begin
-			#10
-			i_a = i;
-			i_b = j;
-			{golden_borr,golden_subtractor} = i_a - i_b ;
-			golden_borr=!golden_borr;
-		 end 
-		
-  #5 ->stop;
+		golden_borr=0;
+	  
+       for( i = 0; i < 2**(WIDTH); i = i + 1 )
+			   for( j = 0; j < 2**(WIDTH); j = j + 1 )begin
+			     repeat(2) begin
+			       #10
+			       i_borr =~i_borr;
+			       i_a = i;
+			       i_b = j;
+			       {golden_borr,golden_subtractor} = i_a - i_b - i_borr ;
+			       golden_borr=golden_borr;
+			     end 
+		     end 
+	#5 ->stop;
 
 end
 
