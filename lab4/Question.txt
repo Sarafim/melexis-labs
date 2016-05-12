@@ -1,0 +1,43 @@
+Question 4.1 – Explain why 001100101 represent 12.625 and 010001010 represent 17.250 in signed fixed-point 5.3 format 
+
+To  convert  an  unsigned  decimal  number  to  a  X.Y  fixed-point  format,  multiply  the  decimal 
+number by 2^Y, drop any fractional remainder, and then convert this to its unsigned binary value using a 
+N.0  format,  where  N  =  X  +  Y
+12.625 * 2^3 = 101, which is 0b001100101 as an eight-bit number
+17.250 * 2^3 = 138, which is 0b010001010 as an eight-bit number
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Question  4.2  –  Make  calculations  and  convert  points  of  filter’s  impulse  response  from  fixed-point representation to the real format (fixed-point numbers are signed with 6-bit word length and 5-bit fraction part):
+h0 = -3; h1 = -8; h2 = -8; h3 = 0; h4 = 11; h5 = 16; h6 = 11; h7 = 0; h8 = -8; h9 = -8; h10 = -3. 
+
+To  convert a  X.Y  fixed-point  number to an  unsigned  decimal  format,  multiply  the  fixed-point 
+number by 2^-Y
+
+h0 = h10 = -3 * 2^-5 = -0.0938
+h1 = h2 = h8 = h9 = -8 * 2^-5 = -0.25
+h3 = h7 = 0 * 2^-5 = 0
+h4 = h6 11 * 2^-5 = 0.3438
+h5 = 16 * 2^-5 = -0.5
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Question 4.3 – Explain, why did we choose accumulator width equal to 25 bit for  filter from section 16, presented on Fig.4.42? Why we shift this 25 bit result by 6 bits right? How we obtain 18-bit data on filter’s output? 
+
+Input and output data in this example are represented in signed fixed-point 0.17 format and needs 
+18 bits to be stored. That’s why registers in register chain, holding input samples, will have width of 
+18 bits. Input samples can be shifted maximum 4 bits left (multiplication by 16), so all 15 data inputs 
+and  data  output  of  big  multiplexor  will  have  dimension  of  18+4=22  bits.  To  prevent  overflow 
+accumulator  (and  adder)  should  have  25  bit-width.  The  number  of  additional  bits  is  calculated  as 
+log2(|M|), where M is the sum of the absolute value of the filter coefficients, which assumes the most 
+hostile  input  that  is  possible.  Such  input  could  happen  if  the  ADC  input  is  too  high  and  serious 
+clipping occurs. In the actual case the sum is: 3+8+8+11+16+11+8+8+3=76 and therefore number of 
+additional bits in accum. will be 7. So the width of accumulator will be 18+7 = 25
+
+On 15-th positive edge of fop, we need convert the contents of accumulator to signed fixed-
+point 0.17 format. To do this, firstly we should discard lower 6 bits of accumulator contents. 
+Obtained 19-bit result will contain desired number in lower 18 bits and most significant bit 
+will indicate an overflow. For correct handling of possible overflow, we should adopt the 
+operation  of  saturation  to  this  19-bit  number,  which  will  give  us  desired  18-bit  result  of 
+convolution.  
+
