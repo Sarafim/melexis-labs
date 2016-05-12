@@ -5,7 +5,7 @@ module Shift_filter_tb();
 parameter PERIOD = 10;
 
 reg 		i_clk;
-reg 		i_rst_n;
+reg 		i_arst_n;
 reg	[6:0]	i_fop_fin;
 
 reg		signed	[17:0]	i_filter;
@@ -15,7 +15,6 @@ reg  signed [17:0] filter_in_data_log_force [0:3148];
 reg  signed [17:0] filter_out_expected [0:3148];
 reg  signed [17:0] filter_out_real [0:3148];
 
-
 integer error_count;
 integer i,j;
 
@@ -23,11 +22,55 @@ event ready;
 
 Shift_filter 	Shift_filter_inst1 (
 									.i_clk(i_clk),
-									.i_rst_n(i_rst_n),
+									.i_arst_n(i_arst_n),
 									.i_filter(i_filter),
 									.i_fop_fin(i_fop_fin),
 									.o_filter(o_filter)
 									);	
+initial	begin:	CLK
+	i_clk = 0;
+	forever #(PERIOD/2)	i_clk =~i_clk;
+end 	//CLK
+
+initial	begin
+	i_arst_n = 0;
+	i_fop_fin = 20;
+	i_filter = 0;
+	@(negedge i_clk);
+	i_arst_n = 1;	
+	for(i = 0; i < 3149; i = i + 1) begin
+		i_filter = filter_in_data_log_force[i];
+		repeat(21)
+			@(negedge i_clk);
+	end 
+end
+
+initial	begin
+	@(negedge i_clk);
+	for(j = 0; j < 3149; j = j + 1)	//3149
+		begin
+			repeat(21)
+				@(posedge i_clk);
+			filter_out_real[j] = o_filter;
+		end 
+	->ready;		
+end
+
+initial begin
+	error_count = 0;
+	@(ready);
+	for(i = 0; i < 3149; i = i + 1)	//3149
+		if(filter_out_expected[i] !== filter_out_real[i])begin
+			error_count = error_count + 1;
+			$display("Error at time %d",$time());
+			$display("filter_out_expected [%d]= %d,\nfilter_out_real[%d] = %d",i, filter_out_expected[i] , i,filter_out_real[i]);
+		end
+	if(error_count == 0)
+		$display("TEST_COMPLETED");
+	else
+		$display("TTEST FAILED\nNUMBER OF ERROR = %d", error_count);	
+	$finish();		
+end
 
 initial 
 	begin: Input_Output_data
@@ -6335,66 +6378,5 @@ initial
  filter_out_expected[3148] <= 18'h00000;
 
 	 end // Input & Output data
-
-initial
-	begin:	CLK
-		i_clk = 0;
-		forever #(PERIOD/2)	i_clk =~i_clk;
-	end 	//CLK
-
-initial
-	begin
-		i = 0;
-		i_rst_n = 0;
-		i_fop_fin = 20;
-		i_filter = 0;
-		@(negedge i_clk);
-		@(negedge i_clk);
-
-		i_rst_n = 1;	
-		for(i = 0; i < 100; i = i + 1) //3149
-			begin
-				$display("i = %d",i);
-				i_filter = filter_in_data_log_force[i];
-				repeat(21)
-					@(negedge i_clk);
-			end 
-
-	end
-
-initial
-	begin
-		j = 0;
-		@(negedge i_clk);
-		@(negedge i_clk);	
-		@(negedge i_clk);	
-		for(j = 0; j < 100; j = j + 1)	//3149
-			begin
-				repeat(21)
-					@(posedge i_clk);
-				filter_out_real[j] = o_filter;
-$display("o_filter = %d", o_filter);
-			end 
-		->ready;		
-	end
-
-initial 
-	begin
-		@(ready);
-		error_count = 0;
-		for(i = 0; i < 100; i = i + 1)	begin//3149
-			if(filter_out_expected[i] !== filter_out_real[i])
-				begin
-				error_count = error_count + 1;
-				end
-$display("filter_out_expected [%d]= %d, filter_out_real[%d] = %d",i, filter_out_expected[i] , i,filter_out_real[i]);
-end
-		if(error_count == 0)
-			$display("SUCCESS");
-		else
-			$display("TOO MUCH ERRORS\nerror_count = %d", error_count);	
-		$finish();		
-	end
-
 
 endmodule
