@@ -1,11 +1,4 @@
-# Harvey Mudd College VLSI MIPS Project
-# Carl Nygaard
-# Spring, 2007
-#
-# Test 002
-#
-# Created: 12/28/06
-#
+# Test 003
 #   Tests immediate instructions, hazards, negative numbers.  
 
 .set noreorder

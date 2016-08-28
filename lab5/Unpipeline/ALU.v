@@ -10,7 +10,7 @@ module ALU(	i_data_A, 		//first  input register
 			o_overflow,		//overflow flag
 			);
 
-input [9:0]	i_ALU_Ctrl;
+input [10:0]	i_ALU_Ctrl;
 
 input [31:0]	i_data_A;
 input signed[31:0]	i_data_B;
@@ -29,10 +29,11 @@ wire [2:0]	i_sh_op;	//SLL=000, 	SRL =010, SRA=011, 	ROR=001
 wire		i_lui;		//LUI
 //						//SLLV=100, SRLV=110, SRAV=111, RORV=101
 wire [1:0]	i_log_op;	//AND,ANDI=00, OR,ORI=01, XOR,XORI=10, NOR=11 
+wire		i_ar_op_en; // enable for overflow
 wire 		i_ar_op;	//ADD,ADDU,ADDI=0, SUB,SUBU,SUBI=1
 wire		i_slt_op;	//SLT = 0, SLTU = 1;
 
-assign {i_ALU_sel,i_sh_op,i_lui,i_log_op,i_ar_op,i_slt_op} = i_ALU_Ctrl;
+assign {i_ALU_sel,i_sh_op,i_lui,i_log_op,i_ar_op_en, i_ar_op,i_slt_op} = i_ALU_Ctrl;
 //Barrel Shifter
 reg signed[62:0]	sh_extend;		//extended i_data_A
 wire [4:0]  sh_amount;		//size for shift
@@ -99,11 +100,11 @@ always @* begin:ALU_SELECTION
 	default:o_data = 32'b0;
 	endcase								
 end//ALU_SELECTION
-assign o_overflow = i_ar_op ?														//form overflow
+assign o_overflow = i_ar_op_en & (i_ar_op ?														//form overflow
 					((!i_data_A[31] &&  i_data_B[31] &&  o_data[31])||			//sub
 					 ( i_data_A[31] && !i_data_B[31] && !o_data[31])):
 					((!i_data_A[31] && !i_data_B[31] &&  o_data[31])||			//add
-					 ( i_data_A[31] &&  i_data_B[31] && !o_data[31]));
+					 ( i_data_A[31] &&  i_data_B[31] && !o_data[31])));
 
 assign o_zero = ~(|o_data);															//form zero
 

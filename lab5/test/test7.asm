@@ -1,3 +1,5 @@
+# Test 007
+
 .set noreorder
 lui	$a3 0xFFFF
 addi	$t0 $zero 0x18

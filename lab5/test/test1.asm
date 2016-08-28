@@ -1,11 +1,4 @@
-# Harvey Mudd College VLSI MIPS Project
-# Carl Nygaard
-# Spring, 2007
-#
-# Test 000
-#
-# Created: 12/24/06
-#
+# Test 001
 # Commands tested:
 #   addi, add, beq, sw
 #

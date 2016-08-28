@@ -1,11 +1,4 @@
-# Harvey Mudd College VLSI MIPS Project
-# Carl Nygaard
-# Spring, 2007
-#
-# Test 003
-#
-# Created: 1/1/07
-#
+# Test 004
 # Expected Behavior:
 #   Tests R-Type Arithmetic instructions (besides mult and div)  
 

@@ -1,11 +1,4 @@
-# Harvey Mudd College VLSI MIPS Project
-# Carl Nygaard
-# Spring, 2007
-#
-# Test 004
-#
-# Created: 1/1/07
-#
+# Test 005
 #   Tests shift operations.
 
 .set noreorder

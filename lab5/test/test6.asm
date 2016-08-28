@@ -1,11 +1,5 @@
-# Harvey Mudd College VLSI MIPS Project
-# Carl Nygaard
-# Spring, 2007
-#
-# Test 007
-#
-# Created: 1/6/07
-#
+# Test 006
+# Commands tested:
 #   Tests store commands
 
 .set noreorder
