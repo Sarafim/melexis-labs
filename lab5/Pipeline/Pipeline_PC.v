@@ -1,7 +1,7 @@
 //Program counter
 `timescale 1ns/1ps
 
-module PC(	i_clk,
+module Pipeline_PC(	i_clk,
 			i_rst_n,
 			i_we,
 			i_data,

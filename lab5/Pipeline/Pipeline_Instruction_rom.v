@@ -1,7 +1,7 @@
 //Instructions Memory
 `timescale 1ns/1ps
 
-module Instruction_rom(	i_address, o_instruction );
+module Pipeline_Instruction_rom(	i_address, o_instruction );
 input [31:0] i_address;
 output  [31:0] o_instruction;
 

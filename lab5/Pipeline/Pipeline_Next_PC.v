@@ -1,6 +1,6 @@
 //Next PC
 `timescale 1ns/1ps
-module Next_PC( i_PC,
+module Pipeline_Next_PC( i_PC,
 				i_Imm,
 				adr_JR,
 				i_zero,

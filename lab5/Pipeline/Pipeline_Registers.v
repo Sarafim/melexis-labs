@@ -1,7 +1,7 @@
 //Registers
 `timescale 1ns/1ps
 
-module Registers(	i_clk,
+module Pipeline_Registers(	i_clk,
 					i_regWr,
 					i_ra,
 					i_rb,

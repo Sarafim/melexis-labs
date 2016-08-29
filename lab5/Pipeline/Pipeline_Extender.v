@@ -1,7 +1,7 @@
 //Extender
 `timescale 1ns/1ps
 
-module Extender(i_data, 
+module Pipeline_Extender(i_data, 
 				i_ExtOp,//1=signed Extend, 0 = unsigned Extend
 				o_data
 				);

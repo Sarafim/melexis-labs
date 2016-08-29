@@ -1,7 +1,7 @@
 //Data Memory
 `timescale 1ns/1ps
 
-module Data_mem(	i_clk,
+module Pipeline_Data_mem(	i_clk,
 					i_MemWrite,
 					i_MemRead,
 					i_address,
